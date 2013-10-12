@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>the title</title>
+<script type="text/javascript" src="imageSource.json"></script>
+<script type="text/javascript" src="Robin_images.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+	//var d = new Drag("scroll");
+	var img = new Robin("mask", "mask_sub" , 10);
+	var startBtn = document.getElementById('start');
+	var stopBtn = document.getElementById('stop');
+	stopBtn.disabled = true;
+	startBtn.onclick = function() {
+		img.picStartScroll();
+		var i = 5;
+		var str = stopBtn.value;
+		var timeend = setInterval(function() {stopBtn.value = str+'('+(i--)+')';} ,1000);
+		setTimeout(function() {
+			stopBtn.disabled = false;
+			clearInterval(timeend);
+			stopBtn.value = str;
+		},6000);
+	}
+	stopBtn.onclick = function() {
+		img.picStopScroll();
+		stopBtn.disabled = true;
+	}
+}
+</script>
+<style type="text/css">
+*{margin: 0; padding: 0; list-style: none;}
+#scroll{width: 500px;  position: absolute; left: 100px; top: 100px; border: 1px solid #333; border-top: 30px solid #333; background: #999;}
+#mask{width: 240px; height: 180px; overflow: hidden; margin: 0 auto; position: relative; border: 2px dotted #fff;}
+#mask_sub{position: absolute; left: 0; top:0; height: 10000px;}
+li{width: 240px; height: 180px;}
+ul {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+span{position: absolute; font-size: 72px;}
+img{border: none;}
+input{padding: 5px;}
+</style>
+</head>
+<body>
+	<div id="scroll">
+		<div id="mask">
+			<div id="mask_sub">
+			<ul>
+			</ul>
+			</div>
+		</div>
+		<input type="button" value="开始" id="start"/>
+		<input type="button" value="停止" id="stop"/>
+	</div>
+
+</body>
+</html>
